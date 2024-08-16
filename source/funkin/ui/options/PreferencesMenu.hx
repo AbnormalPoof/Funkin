@@ -116,11 +116,6 @@ class CheckboxPreferenceItem extends FunkinSprite
     this.currentValue = defaultValue;
   }
 
-  override function update(elapsed:Float)
-  {
-    super.update(elapsed);
-  }
-
   function set_currentValue(value:Bool):Bool
   {
     if (value)
