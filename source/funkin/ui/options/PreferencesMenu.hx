@@ -7,6 +7,7 @@ import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import funkin.ui.AtlasText.AtlasFont;
 import funkin.ui.options.OptionsState.Page;
 import funkin.graphics.FunkinCamera;
+import funkin.graphics.FunkinSprite;
 import funkin.ui.TextMenuList.TextMenuItem;
 
 class PreferencesMenu extends Page
@@ -96,7 +97,7 @@ class PreferencesMenu extends Page
   }
 }
 
-class CheckboxPreferenceItem extends FlxSprite
+class CheckboxPreferenceItem extends FunkinSprite
 {
   public var currentValue(default, set):Bool;
 
@@ -107,6 +108,7 @@ class CheckboxPreferenceItem extends FlxSprite
     frames = Paths.getSparrowAtlas('checkboxThingie');
     animation.addByPrefix('static', 'Check Box unselected', 24, false);
     animation.addByPrefix('checked', 'Check Box selecting animation', 24, false);
+    addOffsets('checked', 17, 70);
 
     setGraphicSize(Std.int(width * 0.7));
     updateHitbox();
@@ -117,25 +119,17 @@ class CheckboxPreferenceItem extends FlxSprite
   override function update(elapsed:Float)
   {
     super.update(elapsed);
-
-    switch (animation.curAnim.name)
-    {
-      case 'static':
-        offset.set();
-      case 'checked':
-        offset.set(17, 70);
-    }
   }
 
   function set_currentValue(value:Bool):Bool
   {
     if (value)
     {
-      animation.play('checked', true);
+      playAnim('checked', true);
     }
     else
     {
-      animation.play('static');
+      playAnim('static');
     }
 
     return currentValue = value;

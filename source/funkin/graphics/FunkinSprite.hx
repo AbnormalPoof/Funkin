@@ -28,6 +28,11 @@ class FunkinSprite extends FlxSprite
   static var previousCachedTextures:Map<String, FlxGraphic> = [];
 
   /**
+   * Offset the sprite by this much when playing each animation.
+   */
+  public var spriteOffsets:Map<String, Array<Float>> = new Map<String, Array<Float>>();
+
+  /**
    * @param x Starting X position
    * @param y Starting Y position
    */
@@ -252,6 +257,40 @@ class FunkinSprite extends FlxSprite
     updateHitbox();
 
     return this;
+  }
+
+  /**
+   * @param name The name of the animation to play.
+   * @param restart Whether to restart the animation if it is already playing.
+   * @param reversed If true, play the animation backwards, from the last frame to the first.
+   */
+  public function playAnim(name:String, restart:Bool = false, ignoreOther:Bool = false, reversed:Bool = false):Void
+  {
+    this.animation.play(name, restart, reversed, 0);
+    applyOffsets(name);
+  }
+
+  /**
+   * @param name The name of the animation.
+   * @param xOffset The Y value as a float.
+   * @param yOffset The X value as a float.
+   */
+  public function addOffsets(name:String, xOffset:Float, yOffset:Float):Void
+  {
+    spriteOffsets.set(name, [xOffset, yOffset]);
+  }
+
+  function applyOffsets(name:String):Void
+  {
+    var offsets = spriteOffsets.get(name);
+    if (offsets != null && !(offsets[0] == 0 && offsets[1] == 0))
+    {
+      this.offset.set(offsets[0], offsets[1]);
+    }
+    else
+    {
+      this.offset.set();
+    }
   }
 
   /**
