@@ -266,10 +266,10 @@ class FunkinSprite extends FlxSprite
    *
    * TODO: Change this to playAnimation instead.
    */
-  @access :flixel
-  public function play(name:String, restart:Bool = false, ignoreOther:Bool = false, reversed:Bool = false):Void
+  @:access(flixel.animation.FlxAnimationController)
+  public override function play(name:String, restart:Bool = false, reversed:Bool = false, frame:Int = 0):Void
   {
-    this.animation.play(name, restart, reversed, 0);
+    super(this.animation.play(name, restart, reversed, 0));
     applyOffsets(name);
   }
 
