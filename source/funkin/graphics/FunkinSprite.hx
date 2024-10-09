@@ -263,6 +263,8 @@ class FunkinSprite extends FlxSprite
    * @param name The name of the animation to play.
    * @param restart Whether to restart the animation if it is already playing.
    * @param reversed If true, play the animation backwards, from the last frame to the first.
+   *
+   * TODO: Change this to playAnimation instead.
    */
   public function playAnim(name:String, restart:Bool = false, ignoreOther:Bool = false, reversed:Bool = false):Void
   {
