@@ -2353,6 +2353,8 @@ class ChartEditorState extends UIState // UIState derives from MusicBeatState
     // save.chartEditorInstVolume = audioInstTrack.volume;
     // save.chartEditorVoicesVolume = audioVocalTrackGroup.volume;
     // save.chartEditorPlaybackSpeed = audioInstTrack.pitch;
+
+    save.flush();
   }
 
   public function populateOpenRecentMenu():Void
