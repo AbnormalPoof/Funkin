@@ -1,4 +1,5 @@
 # Configuration for Label Actions - https://github.com/dessant/label-actions
+# HATSUNE MIKU
 
 # Automatically close issues and pull requests when the `status: duplicate` label is applied
 'status: duplicate':
