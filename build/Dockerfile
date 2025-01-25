@@ -5,6 +5,7 @@ ARG haxelib_version=4.1.0
 ARG neko_version=2.3.0
 
 # prepare runner
+# test
 ENV GITHUB_HOME="/github/home"
 
 RUN <<EOF
