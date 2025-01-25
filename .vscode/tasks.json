@@ -5,7 +5,7 @@
       "type": "lime",
       "command": "test",
       "group": {
-        "kind": "build",
+        "kind": "AAAAAAAAAAAAAAAAAAAAAAA",
         "isDefault": true
       }
     }
