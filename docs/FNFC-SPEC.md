@@ -1,6 +1,6 @@
 # .fnfc File Specification
 
-*Updated 2024-04-29*
+*Updated 2024-04-30*
 
 - Manifest version: `1.0.0`
 - Metadata version: `2.2.2`
