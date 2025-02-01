@@ -236,13 +236,15 @@ class FreeplayDJ extends FlxAtlasSprite
 
   function onFinishAnim(name:String):Void
   {
-    // Idle, Confirm, and NewUnlock don't do anything when finished, so they aren't defined here.
     var intro:String = playableCharData.getAnimationPrefix('intro');
-    var fist_pump:String = playableCharData.getAnimationPrefix('fistpump');
+    var fist_pump:String = playableCharData.getAnimationPrefix('fistPump');
     var idle_easter_egg:String = playableCharData.getAnimationPrefix('idleEasterEgg');
     var loss:String = playableCharData.getAnimationPrefix('loss');
     var cartoon:String = playableCharData.getAnimationPrefix('cartoon');
     var char_select:String = playableCharData.getAnimationPrefix('charSelect');
+    var idle:String = playableCharData.getAnimationPrefix('idle');
+    var confirm:String = playableCharData.getAnimationPrefix('confirm');
+    var new_unlock:String = playableCharData.getAnimationPrefix('newUnlock');
 
     switch (name)
     {
@@ -256,12 +258,19 @@ class FreeplayDJ extends FlxAtlasSprite
           currentState = Idle;
         }
         onIntroDone.dispatch();
+      // These are separate since you get a compiler error otherwise if you use the or operator (|)...
       case fist_pump:
         currentState = Idle;
       case idle_easter_egg:
         currentState = Idle;
       case loss:
         currentState = Idle;
+      case idle:
+        // Do nothing.
+      case confirm:
+        // Do nothing.
+      case new_unlock:
+        // Do nothing.
       case cartoon:
         // trace('Finished cartoon');
 
