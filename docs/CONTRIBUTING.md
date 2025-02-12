@@ -104,71 +104,71 @@ Here are some guidelines for writing comments in your code:
 - Write your comments in a clear and concise manner.
 - Only sign your comments with your name when your changes are complex and may require further explanation.
 
-DO:
+### DON'T:
 ```haxe
   /**
-	* Jumps forward or backward a number of sections in the song.
-	* Accounts for BPM changes, does not prevent death from skipped notes.
-	* @param sections The number of sections to jump, negative to go backwards.
-	*/
+    * jumps around the song
+    * works with bpm changes but skipped notes still hurt
+    * @param sections how many sections to jump, negative = backwards
+    */
   function changeSection(sections:Int):Void
   {
-	// FlxG.sound.music.pause();
+    // Pause the music, as you probably guessed
+    // FlxG.sound.music.pause();
 
-	var targetTimeSteps:Float = Conductor.instance.currentStepTime + (Conductor.instance.stepsPerMeasure * sections);
-	var targetTimeMs:Float = Conductor.instance.getStepTimeInMs(targetTimeSteps);
+    // Set the target time in steps, I don’t really get how this works though lol - [GitHub username]
+    var targetTimeSteps:Float = Conductor.instance.currentStepTime + (Conductor.instance.stepsPerMeasure * sections);
+    var targetTimeMs:Float = Conductor.instance.getStepTimeInMs(targetTimeSteps);
 
-	// Don't go back in time to before the song started.
-	targetTimeMs = Math.max(0, targetTimeMs);
+    // Don't go back in time to before the song started, that would probably break a lot of things and cause a whole bunch of problems!
+    targetTimeMs = Math.max(0, targetTimeMs);
 
-	if (FlxG.sound.music != null)
-	{
-  	FlxG.sound.music.time = targetTimeMs;
-	}
+    if (FlxG.sound.music != null) // If the music is not null, set the time to the target time
+    {
+      FlxG.sound.music.time = targetTimeMs;
+    }
 
-	handleSkippedNotes();
-	SongEventRegistry.handleSkippedEvents(songEvents, Conductor.instance.songPosition);
-	// regenNoteData(FlxG.sound.music.time);
+    // Handle skipped notes and events and all that jazz
+    handleSkippedNotes();
+    SongEventRegistry.handleSkippedEvents(songEvents, Conductor.instance.songPosition);
+    // regenNoteData(FlxG.sound.music.time);
 
-	Conductor.instance.update(FlxG.sound?.music?.time ?? 0.0);
+    Conductor.instance.update(FlxG.sound?.music?.time ?? 0.0);
 
-	resyncVocals();
+    // I hate this function - [GitHub username]
+    resyncVocals();
   }
 ```
 
-DON'T:
+### DO:
 ```haxe
   /**
-	* jumps around the song
-	* works with bpm changes but skipped notes still hurt
-	* @param sections how many sections to jump, negative = backwards
-	*/
+    * Jumps forward or backward a number of sections in the song.
+    * Accounts for BPM changes, does not prevent death from skipped notes.
+    * @param sections The number of sections to jump, negative to go backwards.
+    */
   function changeSection(sections:Int):Void
   {
-	// Pause the music, as you probably guessed
-	// FlxG.sound.music.pause();
+    // FlxG.sound.music.pause();
 
-	// Set the target time in steps, I don’t really get how this works though lol - [GitHub username]
-	var targetTimeSteps:Float = Conductor.instance.currentStepTime + (Conductor.instance.stepsPerMeasure * sections);
-	var targetTimeMs:Float = Conductor.instance.getStepTimeInMs(targetTimeSteps);
+    var targetTimeSteps:Float = Conductor.instance.currentStepTime + (Conductor.instance.stepsPerMeasure * sections);
+    var targetTimeMs:Float = Conductor.instance.getStepTimeInMs(targetTimeSteps);
 
-	// Don't go back in time to before the song started, that would probably break a lot of things and cause a whole bunch of problems!
-	targetTimeMs = Math.max(0, targetTimeMs);
+    // Don't go back in time to before the song started.
+    targetTimeMs = Math.max(0, targetTimeMs);
 
-	if (FlxG.sound.music != null) // If the music is not null, set the time to the target time
-	{
-  	FlxG.sound.music.time = targetTimeMs;
-	}
+    if (FlxG.sound.music != null)
+    {
+      FlxG.sound.music.time = targetTimeMs;
+    }
 
-	// Handle skipped notes and events and all that jazz
-	handleSkippedNotes();
-	SongEventRegistry.handleSkippedEvents(songEvents, Conductor.instance.songPosition);
-	// regenNoteData(FlxG.sound.music.time);
+    handleSkippedNotes();
+    SongEventRegistry.handleSkippedEvents(songEvents, Conductor.instance.songPosition);
+    // regenNoteData(FlxG.sound.music.time);
 
-	Conductor.instance.update(FlxG.sound?.music?.time ?? 0.0);
+    Conductor.instance.update(FlxG.sound?.music?.time ?? 0.0);
 
-	// I hate this function - [GitHub username]
-	resyncVocals();
+    resyncVocals();
   }
 ```
 
