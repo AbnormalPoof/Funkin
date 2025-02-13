@@ -58,7 +58,12 @@ For issues with compiling the game. Legacy versions (before v0.3.0) are not supp
 > If none of the above Issue templates suit your inquiry (e.g. Questions or Coding Help), please [open a discussion](https://github.com/FunkinCrew/Funkin/discussions).
 
 ## Before You Submit...
-Use the search bar on the Issues page to check that your issue hasn't already been reported by someone else!
+Complete the Issue Checklist at the top of your template!
+
+> [!IMPORTANT]
+> If you do not complete each step of the Issue Checklist, **your issue may be closed.**
+
+Be sure to use the search bar on the Issues page to check that your issue hasn't already been reported by someone else.
 Duplicate issues make it harder to keep track of important issues with the game.
 
 Also only report one issue or enhancement at a time! If you have multiple bug reports or suggestions, split them up into separate submissions so they can be checked off one by one.
