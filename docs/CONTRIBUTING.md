@@ -3,18 +3,18 @@ Welcome to the Contributing Guide!
 You can contribute to the Funkin' repository by opening issues or pull requests. This guide will cover best practices for each type of contribution.
 
 # Part 1: Etiquette
-- Be respectful to one another.
-- Keep your titles for issues and pull requests concise and clear. Do not type the whole issue into the title.
-- Do not spam, this includes creating unnecessary issues and pull requests.
-- Use common sense
+- Be respectful to one another. We're here to help each other out!
+- Keep your titles clear and concise. Do not type the whole description into the title.
+- Do not spam by creating unnecessary issues and pull requests.
+- Use common sense!
 
 # Part 2: Issues
 Issues serve many purposes, from reporting bugs to suggesting new features.
-This section provides guidelines to follow when [opening an issue](https://github.com/FunkinCrew/Funkin/issues).
+This section provides guidelines to follow when [opening an issue](https://github.com/FunkinCrew/Funkin/issues). 
 
 ## Requirements
 Make sure you're playing:
-- the latest version of the game
+- the latest version of the game (currently v0.5.3)
 - without any mods
 - on [Newgrounds](https://www.newgrounds.com/portal/view/770371) or downloaded from [itch.io](https://ninja-muffin24.itch.io/funkin)
 
@@ -61,7 +61,7 @@ For issues with compiling the game. Legacy versions (before v0.3.0) are not supp
 Use the search bar on the Issues page to check that your issue hasn't already been reported by someone else!
 Duplicate issues make it harder to keep track of important issues with the game.
 
-Also only report one issue or enhancement at a time! That way they're easier to track.
+Also only report one issue or enhancement at a time! If you have multiple bug reports or suggestions, split them up into separate submissions so they can be checked off one by one.
 
 Once you're sure your issue is unique and specific, feel free to submit it.
 
@@ -186,14 +186,14 @@ Here are some guidelines for writing comments in your code:
 ```
 
 ## Documentation PRs
-Documentation-based PRs make changes such as **fixing typos** or **adding new information** in documentation files.
+Documentation-based PRs make changes such as **fixing typos** or **adding new information** in documentation files. 
 This involves modifying one or several of the repository’s `.md` files, found throughout the repository.
 Make sure your changes are easy to understand and formatted consistently to maximize clarity and readability.
 
 > [!CAUTION]
 > DO NOT TOUCH THE `LICENSE.md` FILE, EVEN TO MAKE SMALL CHANGES!
 
-### Example
+### Example Documentation PR
 #### DO NOT:
 ```
 // The original documentation
@@ -203,7 +203,7 @@ Make sure your changes are easy to understand and formatted consistently to maxi
 - `F5`: ***HOT RELOAD***: Forcibly reload the game's scripts and data files, then restart the current state. If any files in the `assets` folder have been modified, the game should process the changes for you! NOTE: Known bug, this does not reset song charts or song scripts, but it should reset everything else (such as stage layout data and character animation data).
 - `CTRL-SHIFT-L`: ***FORCE CRASH***: Immediately crash the game with a detailed crash log and a stack trace.
 
-// The new additions
+// The new PR additions
 - `ctrl alt shift e`: No idea what this does
 - `alt-f4`: closes the game
 ```
@@ -217,9 +217,9 @@ Make sure your changes are easy to understand and formatted consistently to maxi
 - `F5`: ***HOT RELOAD***: Forcibly reload the game's scripts and data files, then restart the current state. If any files in the `assets` folder have been modified, the game should process the changes for you! NOTE: Known bug, this does not reset song charts or song scripts, but it should reset everything else (such as stage layout data and character animation data).
 - `CTRL-SHIFT-L`: ***FORCE CRASH***: Immediately crash the game with a detailed crash log and a stack trace.
 
-// The new additions
+// The new PR additions
 - `CTRL-ALT-SHIFT-E`: ***DUMP SAVE DATA***: Prompts the user to save their save data as a JSON file, so its contents can be viewed. Only available on debug builds.
-- `ALT-F4`: ***CLOSE***: Closes the game forcibly on Windows.
+- `ALT-F4`: ***CLOSE GAME***: Closes the game forcibly on Windows.
 ```
 
 ## GitHub PRs
@@ -229,10 +229,10 @@ Please test these changes on your fork’s main branch to avoid breaking anythin
 
 ## funkin.assets PRs
 The `assets` submodule has its own repository called [funkin.assets](https://github.com/FunkinCrew/funkin.assets).
-If you only modify files in the `assets` folder, open a PR in the funkin.assets repository instead of the main repository.
+If you only modify files in the `assets` folder, open a PR in the `funkin.assets` repository instead of the main repository.
 If you simultaneously modify files from both repositories, then open two separate PRs and explain the connection in your PR descriptions.
 
-For `funkin.assets`, you should only choose `main` as the base branch, as no `develop` branch exists for that repository.
+Be sure to choose `main` as the base branch for `funkin.assets` PRs, as no `develop` branch exists for that repository.
 
 # Closing
 Thank you for reading the Contributing Guide.
