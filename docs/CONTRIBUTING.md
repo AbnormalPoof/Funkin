@@ -2,7 +2,13 @@
 Welcome to the Contributing Guide!
 You can contribute to the Funkin' repository by opening issues or pull requests. This guide will cover best practices for each type of contribution.
 
-# Part 1: Issues
+# Part 1: Etiquette
+- Be respectful to one another.
+- Keep your titles for issues and pull requests concise and clear. Do not type the whole issue into the title.
+- Do not spam, this includes creating unnecessary issues and pull requests.
+- Use common sense
+
+# Part 2: Issues
 Issues serve many purposes, from reporting bugs to suggesting new features.
 This section provides guidelines to follow when [opening an issue](https://github.com/FunkinCrew/Funkin/issues).
 
@@ -61,7 +67,7 @@ Once you're sure your issue is unique and specific, feel free to submit it.
 
 **Thank you for opening issues!**
 
-# Part 2: Pull Requests
+# Part 3: Pull Requests
 Community members are welcome to contribute their changes by [opening pull requests](https://github.com/FunkinCrew/Funkin/pulls).
 This section covers guidelines for opening and managing pull requests (PRs).
 
@@ -114,7 +120,7 @@ Here are some guidelines for writing comments in your code:
 - Only sign your comments with your name when your changes are complex and may require further explanation.
 
 ### Example Comments
-#### DON'T:
+#### DO NOT:
 ```haxe
   /**
     * jumps around the song
@@ -159,8 +165,6 @@ Here are some guidelines for writing comments in your code:
     */
   function changeSection(sections:Int):Void
   {
-    // FlxG.sound.music.pause();
-
     var targetTimeSteps:Float = Conductor.instance.currentStepTime + (Conductor.instance.stepsPerMeasure * sections);
     var targetTimeMs:Float = Conductor.instance.getStepTimeInMs(targetTimeSteps);
 
@@ -189,6 +193,35 @@ Make sure your changes are easy to understand and formatted consistently to maxi
 > [!CAUTION]
 > DO NOT TOUCH THE `LICENSE.md` FILE, EVEN TO MAKE SMALL CHANGES!
 
+### Example
+#### DO NOT:
+```
+// The original documentation
+- `F2`: ***OVERLAY***: Enables the Flixel debug overlay, which has partial support for scripting.
+- `F3`: ***SCREENSHOT***: Takes a screenshot of the game and saves it to the local `screenshots` directory. Works outside of debug builds too!
+- `F4`: ***EJECT***: Forcibly switch state to the Main Menu (with no extra transition). Useful if you're stuck in a level and you need to get out!
+- `F5`: ***HOT RELOAD***: Forcibly reload the game's scripts and data files, then restart the current state. If any files in the `assets` folder have been modified, the game should process the changes for you! NOTE: Known bug, this does not reset song charts or song scripts, but it should reset everything else (such as stage layout data and character animation data).
+- `CTRL-SHIFT-L`: ***FORCE CRASH***: Immediately crash the game with a detailed crash log and a stack trace.
+
+// The new additions
+- `ctrl alt shift e`: No idea what this does
+- `alt-f4`: closes the game
+```
+
+#### DO:
+```
+// The original documentation
+- `F2`: ***OVERLAY***: Enables the Flixel debug overlay, which has partial support for scripting.
+- `F3`: ***SCREENSHOT***: Takes a screenshot of the game and saves it to the local `screenshots` directory. Works outside of debug builds too!
+- `F4`: ***EJECT***: Forcibly switch state to the Main Menu (with no extra transition). Useful if you're stuck in a level and you need to get out!
+- `F5`: ***HOT RELOAD***: Forcibly reload the game's scripts and data files, then restart the current state. If any files in the `assets` folder have been modified, the game should process the changes for you! NOTE: Known bug, this does not reset song charts or song scripts, but it should reset everything else (such as stage layout data and character animation data).
+- `CTRL-SHIFT-L`: ***FORCE CRASH***: Immediately crash the game with a detailed crash log and a stack trace.
+
+// The new additions
+- `CTRL-ALT-SHIFT-E`: ***DUMP SAVE DATA***: Prompts the user to save their save data as a JSON file, so its contents can be viewed. Only available on debug builds.
+- `ALT-F4`: ***CLOSE***: Closes the game forcibly on Windows.
+```
+
 ## GitHub PRs
 GitHub-related PRs make changes such as **tweaking Issue Templates** or **updating the repository’s workflows**.
 This involves modifying one or several of the repository’s `.yml` files, or any other file in the `.github` folder.
@@ -198,6 +231,8 @@ Please test these changes on your fork’s main branch to avoid breaking anythin
 The `assets` submodule has its own repository called [funkin.assets](https://github.com/FunkinCrew/funkin.assets).
 If you only modify files in the `assets` folder, open a PR in the funkin.assets repository instead of the main repository.
 If you simultaneously modify files from both repositories, then open two separate PRs and explain the connection in your PR descriptions.
+
+For `funkin.assets`, you should only choose `main` as the base branch, as no `develop` branch exists for that repository.
 
 # Closing
 Thank you for reading the Contributing Guide.
