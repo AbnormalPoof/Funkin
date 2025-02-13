@@ -14,7 +14,7 @@ Make sure you're playing:
 
 ## Rejected Features
 If you want to **suggest a feature**, make sure it hasn't already been rejected.
-Here's a list of commonly suggested features that won't be added, along their reasons:
+Here's a list of commonly suggested features and the reasons why they won't be added:
 
 | Feature | Reason |
 | ------- | ------- |
@@ -30,9 +30,6 @@ Here's a list of commonly suggested features that won't be added, along their re
 | Lua Support | https://github.com/FunkinCrew/Funkin/issues/2643#issuecomment-2143718093 |
 
 ## Issue Types
-> [!TIP]
-> If neither of these templates suit your inquiry (ex. Questions), it's best to open a [discussion](https://github.com/FunkinCrew/Funkin/discussions) instead to prevent clutter.
-
 Choose the issue template that best suits your needs!
 Here's what each template is designed for:
 
@@ -51,6 +48,9 @@ For suggestions to add new features or improve existing ones. We'd love to hear 
 ### Compiling Help (only after reading the [Troubleshooting Guide](https://github.com/FunkinCrew/Funkin/blob/main/docs/TROUBLESHOOTING.md))
 For issues with compiling the game. Legacy versions (before v0.3.0) are not supported.
 
+> [!TIP]
+> If none of the above Issue templates suit your inquiry (e.g. Questions or Coding Help), please [open a discussion](https://github.com/FunkinCrew/Funkin/discussions).
+
 ## Before You Submit...
 Use the search bar on the Issues page to check that your issue hasn't already been reported by someone else!
 Duplicate issues make it harder to keep track of important issues with the game.
@@ -61,15 +61,15 @@ Once you're sure your issue is unique and specific, feel free to submit it.
 
 **Thank you for opening issues!**
 
-# Part 2: Pull requests
+# Part 2: Pull Requests
 Community members are welcome to contribute their changes by [opening pull requests](https://github.com/FunkinCrew/Funkin/pulls).
 This section covers guidelines for opening and managing pull requests (PRs).
 
 ## Choosing a base branch
-> [!CAUTION]
-> You should avoid using the default branch (`main` in this case) for your pull request. This is considered an [anti-pattern](https://jmeridth.com/posts/do-not-issue-pull-requests-from-your-master-branch/) by GitHub themselves!
-
 When creating a branch in your fork, base your branch on either the `main` or `develop` branch depending on the types of changes you want to make.
+
+> [!CAUTION]
+> Avoid using your fork's default branch (`main` in this case) for your PR. This is considered an [anti-pattern](https://jmeridth.com/posts/do-not-issue-pull-requests-from-your-master-branch/) by GitHub themselves!
 
 Choose the `main` branch if you modify:
 - Documentation (`.md` files)
@@ -93,6 +93,9 @@ However, some changes are so big that your commit history will look like a mess!
 In this case, you will have to perform a [**rebase**](https://docs.github.com/en/get-started/using-git/about-git-rebase).
 This process reapplies your changes on top of the updated branch and cleanly resolves the merge conflicts.
 
+> [!TIP]
+> If your commit history becomes too long, you can use rebase to `squash` your PR's commits into a single commit.
+
 ## Code PRs
 
 > [!IMPORTANT]
@@ -110,7 +113,7 @@ Here are some guidelines for writing comments in your code:
 - Write your comments in a clear and concise manner.
 - Only sign your comments with your name when your changes are complex and may require further explanation.
 
-### Example:
+### Example Comments
 #### DON'T:
 ```haxe
   /**
@@ -171,7 +174,6 @@ Here are some guidelines for writing comments in your code:
 
     handleSkippedNotes();
     SongEventRegistry.handleSkippedEvents(songEvents, Conductor.instance.songPosition);
-    // regenNoteData(FlxG.sound.music.time);
 
     Conductor.instance.update(FlxG.sound?.music?.time ?? 0.0);
 
