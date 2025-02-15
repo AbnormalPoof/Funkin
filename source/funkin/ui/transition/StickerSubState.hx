@@ -3,7 +3,6 @@ package funkin.ui.transition;
 import flixel.FlxSprite;
 import haxe.Json;
 import funkin.graphics.FunkinSprite;
-// import flxtyped group
 import funkin.ui.MusicBeatSubState;
 import funkin.ui.story.StoryMenuState;
 import flixel.group.FlxGroup.FlxTypedGroup;
@@ -117,14 +116,6 @@ class StickerSubState extends MusicBeatSubState
   {
     grpStickers.cameras = FlxG.cameras.list;
 
-    /*
-      if (dipshit != null)
-      {
-        FlxG.removeChild(dipshit);
-        dipshit = null;
-      }
-     */
-
     if (grpStickers.members == null || grpStickers.members.length == 0)
     {
       switchingState = false;
@@ -189,33 +180,6 @@ class StickerSubState extends MusicBeatSubState
     }
 
     FlxG.random.shuffle(grpStickers.members);
-
-    // var stickerCount:Int = 0;
-
-    // for (w in 0...6)
-    // {
-    //   var xPos:Float = FlxG.width * (w / 6);
-    //   for (h in 0...6)
-    //   {
-    //     var yPos:Float = FlxG.height * (h / 6);
-    //     var sticker = grpStickers.members[stickerCount];
-    //     xPos -= sticker.width / 2;
-    //     yPos -= sticker.height * 0.9;
-    //     sticker.x = xPos;
-    //     sticker.y = yPos;
-
-    //     stickerCount++;
-    //   }
-    // }
-
-    // for (ind => sticker in grpStickers.members)
-    // {
-    //   sticker.x = (ind % 8) * sticker.width;
-    //   var yShit:Int = Math.floor(ind / 8);
-    //   sticker.y += yShit * sticker.height;
-    //   // scales it juuuust a smidge
-    //   sticker.y += 20 * yShit;
-    // }
 
     // another damn for loop... apologies!!!
     for (ind => sticker in grpStickers.members)
@@ -288,11 +252,6 @@ class StickerSubState extends MusicBeatSubState
   override public function update(elapsed:Float):Void
   {
     super.update(elapsed);
-
-    // if (FlxG.keys.justPressed.ANY)
-    // {
-    //   regenStickers();
-    // }
   }
 
   var switchingState:Bool = false;

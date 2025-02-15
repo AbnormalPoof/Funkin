@@ -101,10 +101,6 @@ class LoadingState extends MusicBeatSubState
     {
       var library = Assets.getLibrary('songs');
       var symbolPath = path.split(':').pop();
-      // @:privateAccess
-      // library.types.set(symbolPath, SOUND);
-      // @:privateAccess
-      // library.pathGroups.set(symbolPath, [library.__cacheBreak(symbolPath)]);
       var callback = callbacks.add('song:' + path);
       Assets.loadSound(path).onComplete(function(_) {
         callback();
@@ -145,15 +141,11 @@ class LoadingState extends MusicBeatSubState
 
     funkay.setGraphicSize(Std.int(FlxMath.lerp(FlxG.width * 0.88, funkay.width, 0.9)));
     funkay.updateHitbox();
-    // funkay.updateHitbox();
 
     if (controls.ACCEPT)
     {
       funkay.setGraphicSize(Std.int(funkay.width + 60));
       funkay.updateHitbox();
-      // funkay.setGraphicSize(0, Std.int(funkay.height + 50));
-      // funkay.updateHitbox();
-      // funkay.screenCenter();
     }
 
     if (callbacks != null)
