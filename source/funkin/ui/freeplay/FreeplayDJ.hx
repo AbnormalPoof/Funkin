@@ -236,19 +236,10 @@ class FreeplayDJ extends FlxAtlasSprite
 
   function onFinishAnim(name:String):Void
   {
-    var intro:String = playableCharData.getAnimationPrefix('intro');
-    var fist_pump:String = playableCharData.getAnimationPrefix('fistPump');
-    var idle_easter_egg:String = playableCharData.getAnimationPrefix('idleEasterEgg');
-    var loss:String = playableCharData.getAnimationPrefix('loss');
-    var cartoon:String = playableCharData.getAnimationPrefix('cartoon');
-    var char_select:String = playableCharData.getAnimationPrefix('charSelect');
-    var idle:String = playableCharData.getAnimationPrefix('idle');
-    var confirm:String = playableCharData.getAnimationPrefix('confirm');
-    var new_unlock:String = playableCharData.getAnimationPrefix('newUnlock');
-
-    switch (name)
+    switch (currentState)
     {
-      case intro:
+      case Intro:
+        // trace('Finished ${name}');
         if (PlayerRegistry.instance.hasNewCharacter())
         {
           currentState = NewUnlock;
@@ -259,19 +250,13 @@ class FreeplayDJ extends FlxAtlasSprite
         }
         onIntroDone.dispatch();
       // These are separate since you get a compiler error otherwise if you use the or operator (|)...
-      case fist_pump:
+      case FistPump:
+        // trace('Finished ${name}');
         currentState = Idle;
-      case idle_easter_egg:
+      case IdleEasterEgg:
+        // trace('Finished ${name}');
         currentState = Idle;
-      case loss:
-        currentState = Idle;
-      case idle:
-        // Do nothing.
-      case confirm:
-        // Do nothing.
-      case new_unlock:
-        // Do nothing.
-      case cartoon:
+      case Cartoon:
         // trace('Finished cartoon');
 
         var frame:Int = FlxG.random.bool(33) ? playableCharData.getCartoonLoopBlinkFrame() : playableCharData.getCartoonLoopFrame();
@@ -285,10 +270,12 @@ class FreeplayDJ extends FlxAtlasSprite
         }
         trace('Replay idle: ${frame}');
         playFlashAnimation(name, true, false, false, frame);
-      case char_select:
+      case CharSelect:
+        // trace('Finished ${name}');
         onCharSelectComplete();
       default:
-        trace('Finished ${name}');
+        // trace('Finished ${name}');
+        // Nothing!
     }
   }
 
