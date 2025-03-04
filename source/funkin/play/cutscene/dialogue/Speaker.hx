@@ -1,6 +1,6 @@
 package funkin.play.cutscene.dialogue;
 
-import flixel.FlxSprite;
+import funkin.graphics.FunkinSprite;
 import funkin.data.IRegistryEntry;
 import funkin.modding.events.ScriptEvent;
 import flixel.graphics.frames.FlxFramesCollection;
@@ -14,7 +14,7 @@ import funkin.data.dialogue.speaker.SpeakerRegistry;
  *
  * Most conversations have two speakers, with one being flipped.
  */
-class Speaker extends FlxSprite implements IDialogueScriptedClass implements IRegistryEntry<SpeakerData>
+class Speaker extends FunkinSprite implements IDialogueScriptedClass implements IRegistryEntry<SpeakerData>
 {
   /**
    * The internal ID for this speaker.
@@ -36,17 +36,7 @@ class Speaker extends FlxSprite implements IDialogueScriptedClass implements IRe
     return _data.name;
   }
 
-  /**
-   * Offset the speaker's sprite by this much when playing each animation.
-   */
-  var animationOffsets:Map<String, Array<Float>> = new Map<String, Array<Float>>();
-
-  /**
-   * The current animation offset being used.
-   */
-  var animOffsets(default, set):Array<Float> = [0, 0];
-
-  function set_animOffsets(value:Array<Float>):Array<Float>
+  override function set_animOffsets(value:Array<Float>):Array<Float>
   {
     if (animOffsets == null) animOffsets = [0, 0];
     if ((animOffsets[0] == value[0]) && (animOffsets[1] == value[1])) return value;
@@ -60,12 +50,7 @@ class Speaker extends FlxSprite implements IDialogueScriptedClass implements IRe
     return animOffsets = value;
   }
 
-  /**
-   * The offset of the speaker overall.
-   */
-  public var globalOffsets(default, set):Array<Float> = [0, 0];
-
-  function set_globalOffsets(value:Array<Float>):Array<Float>
+  override function set_globalOffsets(value:Array<Float>):Array<Float>
   {
     if (globalOffsets == null) globalOffsets = [0, 0];
     if (globalOffsets == value) return value;
@@ -176,7 +161,7 @@ class Speaker extends FlxSprite implements IDialogueScriptedClass implements IRe
     {
       if (anim.offsets == null)
       {
-        setAnimationOffsets(anim.name, 0, 0);
+        setAnimationOffsets(anim.name, 0.0, 0.0);
       }
       else
       {
@@ -198,8 +183,6 @@ class Speaker extends FlxSprite implements IDialogueScriptedClass implements IRe
     if (correctName == null) return;
 
     this.animation.play(correctName, restart, false, 0);
-
-    applyAnimationOffsets(correctName);
   }
 
   public function getCurrentAnimation():String
@@ -247,30 +230,6 @@ class Speaker extends FlxSprite implements IDialogueScriptedClass implements IRe
     if (this.animation == null) return false;
 
     return this.animation.getByName(id) != null;
-  }
-
-  /**
-   * Define the animation offsets for a specific animation.
-   */
-  public function setAnimationOffsets(name:String, xOffset:Float, yOffset:Float):Void
-  {
-    animationOffsets.set(name, [xOffset, yOffset]);
-  }
-
-  /**
-   * Retrieve an apply the animation offsets for a specific animation.
-   */
-  function applyAnimationOffsets(name:String):Void
-  {
-    var offsets:Array<Float> = animationOffsets.get(name);
-    if (offsets != null && !(offsets[0] == 0 && offsets[1] == 0))
-    {
-      this.animOffsets = offsets;
-    }
-    else
-    {
-      this.animOffsets = [0, 0];
-    }
   }
 
   public function onDialogueStart(event:DialogueScriptEvent):Void {}

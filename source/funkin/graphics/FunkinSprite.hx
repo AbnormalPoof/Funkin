@@ -10,6 +10,7 @@ import openfl.display.BitmapData;
 import flixel.math.FlxRect;
 import flixel.math.FlxPoint;
 import flixel.graphics.frames.FlxFrame;
+import funkin.graphics.FunkinAnimationController;
 import flixel.FlxCamera;
 
 /**
@@ -32,12 +33,56 @@ class FunkinSprite extends FlxSprite
   static var previousCachedTextures:Map<String, FlxGraphic> = [];
 
   /**
+   * A map of offsets for each animation.
+   */
+  public var animationOffsets:Map<String, Array<Float>> = new Map<String, Array<Float>>();
+
+  /**
+   * The current animation offset being used.
+   */
+  public var animOffsets(default, set):Array<Float> = [0, 0];
+
+  function set_animOffsets(value:Array<Float>):Array<Float>
+  {
+    if (animOffsets == null) animOffsets = [0, 0];
+    if (value == null) value = [0, 0];
+    if ((animOffsets[0] == value[0]) && (animOffsets[1] == value[1])) return value;
+
+    return animOffsets = value;
+  }
+
+  /**
+   * The offset of the sprite overall.
+   */
+  public var globalOffsets(default, set):Array<Float> = [0, 0];
+
+  function set_globalOffsets(value:Array<Float>):Array<Float>
+  {
+    if (globalOffsets == null) globalOffsets = [0, 0];
+    if (globalOffsets == value) return value;
+
+    return globalOffsets = value;
+  }
+
+  /**
    * @param x Starting X position
    * @param y Starting Y position
    */
   public function new(?x:Float = 0, ?y:Float = 0)
   {
     super(x, y);
+    globalOffsets = [x, y];
+  }
+
+  /**
+   * We replace the animation controller with our own for offsets support.
+   */
+  override function initVars():Void
+  {
+    super.initVars();
+
+    animation.destroy();
+    animation = new FunkinAnimationController(this);
   }
 
   /**
@@ -193,6 +238,27 @@ class FunkinSprite extends FlxSprite
     }
   }
 
+  /**
+   * Applies the offsets for a specific animation.
+   * @param animName The animation name.
+   */
+  public function applyAnimationOffsets(animName:String):Void
+  {
+    var offsets = animationOffsets.get(animName);
+    this.animOffsets = offsets;
+  }
+
+  /**
+   * Define the animation offsets for a specific animation.
+   * @param name The animation name.
+   * @param xOffset The x offset.
+   * @param yOffset The y offset.
+   */
+  public function setAnimationOffsets(name:String, xOffset:Float, yOffset:Float):Void
+  {
+    animationOffsets.set(name, [xOffset, yOffset]);
+  }
+
   public static function cacheSparrow(key:String):Void
   {
     cacheTexture(Paths.image(key));
@@ -323,6 +389,10 @@ class FunkinSprite extends FlxSprite
     if (camera == null) camera = FlxG.camera;
 
     result.set(x, y);
+
+    result.x -= animOffsets[0];
+    result.y -= animOffsets[1];
+
     if (pixelPerfectPosition)
     {
       _rect.width = _rect.width / this.scale.x;
