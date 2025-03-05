@@ -42,6 +42,10 @@ class FunkinSprite extends FlxSprite
    */
   public var animOffsets(default, set):Array<Float> = [0, 0];
 
+  /**
+   * Sets the current animation offset.
+   * Override this in your class if you want to handle animation offsets differently.
+   */
   function set_animOffsets(value:Array<Float>):Array<Float>
   {
     if (animOffsets == null) animOffsets = [0, 0];
@@ -56,6 +60,10 @@ class FunkinSprite extends FlxSprite
    */
   public var globalOffsets(default, set):Array<Float> = [0, 0];
 
+  /**
+   * Sets the global offset.
+   * Override this in your class if you want to handle global offsets differently.
+   */
   function set_globalOffsets(value:Array<Float>):Array<Float>
   {
     if (globalOffsets == null) globalOffsets = [0, 0];
@@ -74,13 +82,11 @@ class FunkinSprite extends FlxSprite
     globalOffsets = [x, y];
   }
 
-  /**
-   * We replace the animation controller with our own for offsets support.
-   */
   override function initVars():Void
   {
     super.initVars();
 
+    // We replace `FlxSprite`'s default animation controller with our own for offsets support.
     animation.destroy();
     animation = new FunkinAnimationController(this);
   }
@@ -239,6 +245,24 @@ class FunkinSprite extends FlxSprite
   }
 
   /**
+   * Ensures the sparrow atlas with the given key is cached.
+   * @param key The key of the sparrow atlas to cache.
+   */
+  public static function cacheSparrow(key:String):Void
+  {
+    cacheTexture(Paths.image(key));
+  }
+
+  /**
+   * Ensures the packer atlas with the given key is cached.
+   * @param key The key of the packer atlas to cache.
+   */
+  public static function cachePacker(key:String):Void
+  {
+    cacheTexture(Paths.image(key));
+  }
+
+  /**
    * Applies the offsets for a specific animation.
    * @param animName The animation name.
    */
@@ -257,16 +281,6 @@ class FunkinSprite extends FlxSprite
   public function setAnimationOffsets(name:String, xOffset:Float, yOffset:Float):Void
   {
     animationOffsets.set(name, [xOffset, yOffset]);
-  }
-
-  public static function cacheSparrow(key:String):Void
-  {
-    cacheTexture(Paths.image(key));
-  }
-
-  public static function cachePacker(key:String):Void
-  {
-    cacheTexture(Paths.image(key));
   }
 
   /**
@@ -291,6 +305,11 @@ class FunkinSprite extends FlxSprite
     }
   }
 
+  /**
+   * Whether or not the given graphic is cached.
+   * @param graphic The graphic to check.
+   * @return Bool
+   */
   static function isGraphicCached(graphic:FlxGraphic):Bool
   {
     if (graphic == null) return false;
@@ -305,6 +324,7 @@ class FunkinSprite extends FlxSprite
   }
 
   /**
+   * Whether or not the given animation is dynamic (has multiple frames).
    * @param id The animation ID to check.
    * @return Whether the animation is dynamic (has multiple frames). `false` for static, one-frame animations.
    */
