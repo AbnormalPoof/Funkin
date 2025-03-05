@@ -460,18 +460,6 @@ class HealthIcon extends FunkinSprite
   }
 
   /**
-   * @param id The name of the animation to check for.
-   * @return Whether this sprite posesses the given animation.
-   *   Only true if the animation was successfully loaded from the XML.
-   */
-  public function hasAnimation(id:String):Bool
-  {
-    if (this.animation == null) return false;
-
-    return this.animation.getByName(id) != null;
-  }
-
-  /**
    * @return Whether the current animation is in the finished state.
    */
   public function isAnimationFinished():Bool

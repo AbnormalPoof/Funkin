@@ -337,6 +337,18 @@ class FunkinSprite extends FlxSprite
   }
 
   /**
+   * @param id The name of the animation to check for.
+   * @return Whether this sprite posesses the given animation.
+   * Only true if the animation was successfully loaded from the XML.
+   */
+  public function hasAnimation(id:String):Bool
+  {
+    if (this.animation == null) return false;
+
+    return this.animation.getByName(id) != null;
+  }
+
+  /**
    * Acts similarly to `makeGraphic`, but with improved memory usage,
    * at the expense of not being able to paint onto the resulting sprite.
    *

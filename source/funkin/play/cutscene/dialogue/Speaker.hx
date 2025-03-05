@@ -225,13 +225,6 @@ class Speaker extends FunkinSprite implements IDialogueScriptedClass implements 
     }
   }
 
-  public function hasAnimation(id:String):Bool
-  {
-    if (this.animation == null) return false;
-
-    return this.animation.getByName(id) != null;
-  }
-
   public function onDialogueStart(event:DialogueScriptEvent):Void {}
 
   public function onDialogueCompleteLine(event:DialogueScriptEvent):Void {}
