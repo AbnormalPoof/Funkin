@@ -185,12 +185,6 @@ class Speaker extends FunkinSprite implements IDialogueScriptedClass implements 
     this.animation.play(correctName, restart, false, 0);
   }
 
-  public function getCurrentAnimation():String
-  {
-    if (this.animation == null || this.animation.curAnim == null) return "";
-    return this.animation.curAnim.name;
-  }
-
   /**
    * Ensure that a given animation exists before playing it.
    * Will gracefully check for name, then name with stripped suffixes, then 'idle', then fail to play.

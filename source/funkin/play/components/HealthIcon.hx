@@ -451,15 +451,6 @@ class HealthIcon extends FunkinSprite
   }
 
   /**
-   * @return Name of the current animation being played by this health icon.
-   */
-  public function getCurrentAnimation():String
-  {
-    if (this.animation == null || this.animation.curAnim == null) return "";
-    return this.animation.curAnim.name;
-  }
-
-  /**
    * @return Whether the current animation is in the finished state.
    */
   public function isAnimationFinished():Bool

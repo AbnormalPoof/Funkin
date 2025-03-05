@@ -349,6 +349,17 @@ class FunkinSprite extends FlxSprite
   }
 
   /**
+   * Returns the name of the animation that is currently playing.
+   * If no animation is playing (usually this means the sprite is BROKEN!),
+   * returns an empty string to prevent NPEs.
+   */
+  public function getCurrentAnimation():String
+  {
+    if (this.animation == null || this.animation.curAnim == null) return "";
+    return this.animation.curAnim.name;
+  }
+
+  /**
    * Acts similarly to `makeGraphic`, but with improved memory usage,
    * at the expense of not being able to paint onto the resulting sprite.
    *

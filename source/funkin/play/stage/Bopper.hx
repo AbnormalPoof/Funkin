@@ -290,17 +290,6 @@ class Bopper extends StageProp implements IPlayStateScriptedClass
     return this.animation?.finished ?? false;
   }
 
-  /**
-   * Returns the name of the animation that is currently playing.
-   * If no animation is playing (usually this means the character is BROKEN!),
-   *   returns an empty string to prevent NPEs.
-   */
-  public function getCurrentAnimation():String
-  {
-    if (this.animation == null || this.animation.curAnim == null) return "";
-    return this.animation.curAnim.name;
-  }
-
   // override getScreenPosition (used by FlxSprite's draw method) to account for animation offsets.
   override function getScreenPosition(?result:FlxPoint, ?camera:FlxCamera):FlxPoint
   {
