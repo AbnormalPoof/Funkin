@@ -16,6 +16,7 @@ import flixel.util.FlxTimer;
 import funkin.api.newgrounds.NGio;
 import funkin.audio.FunkinSound;
 import funkin.audio.VoicesGroup;
+import funkin.data.character.CharacterRegistry;
 import funkin.data.dialogue.conversation.ConversationRegistry;
 import funkin.data.event.SongEventRegistry;
 import funkin.data.notestyle.NoteStyleRegistry;
@@ -31,7 +32,6 @@ import funkin.input.PreciseInputManager;
 import funkin.modding.events.ScriptEvent;
 import funkin.modding.events.ScriptEventDispatcher;
 import funkin.play.character.BaseCharacter;
-import funkin.play.character.CharacterData.CharacterDataParser;
 import funkin.play.components.ComboMilestone;
 import funkin.play.components.HealthIcon;
 import funkin.play.components.PopUpStuff;
@@ -1679,7 +1679,7 @@ class PlayState extends MusicBeatSubState
     //
     // GIRLFRIEND
     //
-    var girlfriend:BaseCharacter = CharacterDataParser.fetchCharacter(currentCharacterData.girlfriend);
+    var girlfriend:BaseCharacter = CharacterRegistry.instance.fetchCharacter(currentCharacterData.girlfriend);
 
     if (girlfriend != null)
     {
@@ -1697,7 +1697,7 @@ class PlayState extends MusicBeatSubState
     //
     // DAD
     //
-    var dad:BaseCharacter = CharacterDataParser.fetchCharacter(currentCharacterData.opponent);
+    var dad:BaseCharacter = CharacterRegistry.instance.fetchCharacter(currentCharacterData.opponent);
 
     if (dad != null)
     {
@@ -1720,7 +1720,7 @@ class PlayState extends MusicBeatSubState
     //
     // BOYFRIEND
     //
-    var boyfriend:BaseCharacter = CharacterDataParser.fetchCharacter(currentCharacterData.player);
+    var boyfriend:BaseCharacter = CharacterRegistry.instance.fetchCharacter(currentCharacterData.player);
 
     if (boyfriend != null)
     {
