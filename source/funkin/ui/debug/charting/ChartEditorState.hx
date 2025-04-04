@@ -4076,6 +4076,8 @@ class ChartEditorState extends UIState // UIState derives from MusicBeatState
    */
   function handleSnap():Void
   {
+    if (isHaxeUIFocused || isHaxeUIDialogOpen) return;
+
     if (currentLiveInputStyle == None)
     {
       if (FlxG.keys.justPressed.LEFT && !FlxG.keys.pressed.CONTROL)
@@ -5161,6 +5163,8 @@ class ChartEditorState extends UIState // UIState derives from MusicBeatState
 
   function handlePlayhead():Void
   {
+    if (isHaxeUIFocused || isHaxeUIDialogOpen) return;
+
     // Place notes at the playhead with the keyboard.
     for (note => key in LIVE_INPUT_KEYS[currentLiveInputStyle])
     {
@@ -5415,6 +5419,8 @@ class ChartEditorState extends UIState // UIState derives from MusicBeatState
    */
   function handleFileKeybinds():Void
   {
+    if (isHaxeUIFocused || isHaxeUIDialogOpen) return;
+
     // CTRL + N = New Chart
     if (FlxG.keys.pressed.CONTROL && FlxG.keys.justPressed.N && !isHaxeUIDialogOpen)
     {
@@ -5473,6 +5479,8 @@ class ChartEditorState extends UIState // UIState derives from MusicBeatState
    */
   function handleEditKeybinds():Void
   {
+    if (isHaxeUIFocused || isHaxeUIDialogOpen) return;
+
     // CTRL + Z = Undo
     if (undoKeyHandler.activated)
     {
@@ -5601,6 +5609,8 @@ class ChartEditorState extends UIState // UIState derives from MusicBeatState
    */
   function handleViewKeybinds():Void
   {
+    if (isHaxeUIFocused || isHaxeUIDialogOpen) return;
+
     if (currentLiveInputStyle == None)
     {
       if (FlxG.keys.pressed.CONTROL && FlxG.keys.justPressed.LEFT)
