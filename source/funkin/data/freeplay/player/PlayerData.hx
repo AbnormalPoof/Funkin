@@ -94,6 +94,13 @@ class PlayerFreeplayDJData
   var assetPath:String;
   var animations:Array<AnimationData>;
 
+  /**
+   * `sparrow` or `animateatlas` or whatever
+   */
+  @:optional
+  @:default("animateatlas")
+  var renderType:String;
+
   @:optional
   @:default("BOYFRIEND")
   var text1:String;

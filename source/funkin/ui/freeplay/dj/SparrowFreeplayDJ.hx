@@ -1,4 +1,4 @@
-package funkin.ui.freeplay;
+package funkin.ui.freeplay.dj;
 
 import flixel.util.FlxSignal;
 import funkin.graphics.adobeanimate.FlxAtlasSprite;
@@ -6,31 +6,8 @@ import funkin.audio.FunkinSound;
 import funkin.data.freeplay.player.PlayerRegistry;
 import funkin.data.freeplay.player.PlayerData.PlayerFreeplayDJData;
 
-class FreeplayDJ extends FlxAtlasSprite
+class SparrowFreeplayDJ extends FreeplayDJ
 {
-  // Represents the sprite's current status.
-  // Without state machines I would have driven myself crazy years ago.
-  // Made this PRIVATE so we can keep track of everything that can alter the state!
-  //   Add a function to this class if you want to edit this value from outside.
-  private var currentState:FreeplayDJState = Intro;
-
-  // A callback activated when the intro animation finishes.
-  public var onIntroDone:FlxSignal = new FlxSignal();
-
-  // A callback activated when the idle easter egg plays.
-  public var onIdleEasterEgg:FlxSignal = new FlxSignal();
-
-  var seenIdleEasterEgg:Bool = false;
-
-  static final IDLE_EGG_PERIOD:Float = 60.0;
-  static final IDLE_CARTOON_PERIOD:Float = 120.0;
-
-  // Time since last special idle animation you.
-  var timeIdling:Float = 0;
-
-  final characterId:String = Constants.DEFAULT_CHARACTER;
-  final playableCharData:PlayerFreeplayDJData;
-
   public function new(x:Float, y:Float, characterId:String)
   {
     this.characterId = characterId;
