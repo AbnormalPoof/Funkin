@@ -36,6 +36,7 @@ import funkin.save.Save;
 import funkin.save.Save.SaveScoreData;
 import funkin.ui.AtlasText;
 import funkin.ui.freeplay.charselect.PlayableCharacter;
+import funkin.ui.freeplay.dj.FreeplayDJ;
 import funkin.ui.mainmenu.MainMenuState;
 import funkin.ui.MusicBeatSubState;
 import funkin.ui.story.Level;
