@@ -321,6 +321,11 @@ class StoryMenuState extends MusicBeatState
 
     handleKeyPresses();
 
+    if (FlxG.keys.justPressed.F6)
+    {
+      funkin.util.logging.CrashHandler.induceNullObjectReference();
+    }
+
     super.update(elapsed);
   }
 

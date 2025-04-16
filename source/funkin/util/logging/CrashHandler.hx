@@ -49,13 +49,29 @@ class CrashHandler
   {
     try
     {
-      errorSignal.dispatch(generateErrorMessage(error));
+      var isNullObj:Bool = error.error.indexOf("Null Object Reference") != -1;
+
+      if (isNullObj)
+      {
+        @:privateAccess
+        error.__preventDefault = true;
+      }
+
+      var errorMsg:String = generateErrorMessage(error);
+
+      errorSignal.dispatch(errorMsg);
 
       #if sys
       logError(error);
       #end
 
-      displayError(error);
+      displayError(error, isNullObj);
+
+      if (isNullObj)
+      {
+        flixel.FlxG.switchState(() -> new funkin.ui.mainmenu.MainMenuState());
+        return;
+      }
     }
     catch (e:Dynamic)
     {
@@ -95,13 +111,17 @@ class CrashHandler
     #end
   }
 
-  static function displayError(error:UncaughtErrorEvent):Void
+  static function displayError(error:UncaughtErrorEvent, ?fallback:Bool = false):Void
   {
-    displayErrorMessage(generateErrorMessage(error));
+    displayErrorMessage(generateErrorMessage(error), fallback);
   }
 
-  static function displayErrorMessage(message:String):Void
+  static function displayErrorMessage(message:String, ?fallback:Bool = false):Void
   {
+    if (fallback ?? false)
+    {
+      message += "\nThe game will now attempt to return to the Main Menu.";
+    }
     lime.app.Application.current.window.alert(message, "Fatal Uncaught Exception");
   }
 
