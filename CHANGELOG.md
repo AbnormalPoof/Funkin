@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- The mod API version is now 0.6.3. 
+- The mod API version is now 0.6.3.
   - Be sure to update the version in your mods' metadata, then ensure they are still working!
 - Eric's scoring rebalance update!
   - Misses (not ghost misses) are now worth -100 points, up from -10.
@@ -52,7 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Alternate instrumentals for Cocoa, Senpai, Roses, and Stress are now locked until their Pico Mix is beaten.
 - Restarting Stress or Stress (Pico Mix) no longer spawns too many Tankmen in the background.
 - Pico's game over animation now displays properly on Ugh (Pico Mix) and Guns (Pico Mix).
-- Tankman's death lines now play for Boyfriend in Ugh, Guns, and Ugh Erect.  
+- Tankman's death lines now play for Boyfriend in Ugh, Guns, and Ugh Erect.
 - A-Bot's visualizer is now blank before the song starts.
 - Adding custom parameters to note kinds no longer crashes the Chart Editor.
 - Debug editor tooltips no longer display behind windows.

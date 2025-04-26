@@ -122,6 +122,10 @@ class Module implements IPlayStateScriptedClass implements IStateChangingScripte
    */
   public function onNoteMiss(event:NoteScriptEvent) {}
 
+  /**
+   * Called when a hold note has been dropped.
+   * This gets dispatched for both the player and opponent strumlines.
+   */
   public function onNoteHoldDrop(event:HoldNoteScriptEvent) {}
 
   /**
