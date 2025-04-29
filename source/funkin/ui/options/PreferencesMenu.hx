@@ -120,8 +120,6 @@ class PreferencesMenu extends Page<OptionsState.OptionsMenuPageName>
       Preferences.autoFullscreen = value;
     }, Preferences.autoFullscreen);
 
-    // disabled on macos due to "error: Late swap tearing currently unsupported"
-    #if !mac
     createPrefItemEnum('VSync', 'If enabled, game will attempt to match framerate with your monitor.', [
       "Off" => WindowVSyncMode.OFF,
       "On" => WindowVSyncMode.ON,
@@ -135,7 +133,7 @@ class PreferencesMenu extends Page<OptionsState.OptionsMenuPageName>
         case WindowVSyncMode.ON: "On";
         case WindowVSyncMode.ADAPTIVE: "Adaptive";
       });
-    #end
+
     #if web
     createPrefItemCheckbox('Unlocked Framerate', 'If enabled, the framerate will be unlocked.', function(value:Bool):Void {
       Preferences.unlockedFramerate = value;
