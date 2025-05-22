@@ -14,7 +14,8 @@ import funkin.ui.TextMenuList.TextMenuItem;
 import funkin.ui.options.items.CheckboxPreferenceItem;
 import funkin.ui.options.items.NumberPreferenceItem;
 import funkin.ui.options.items.EnumPreferenceItem;
-import lime.ui.WindowVSyncMode;
+import funkin.data.preferences.PreferenceRegistry;
+import funkin.ui.options.UserPreference;
 
 class PreferencesMenu extends Page<OptionsState.OptionsMenuPageName>
 {
@@ -94,74 +95,37 @@ class PreferencesMenu extends Page<OptionsState.OptionsMenuPageName>
    */
   function createPrefItems():Void
   {
-    createPrefItemCheckbox('Naughtyness', 'If enabled, raunchy content (such as swearing, etc.) will be displayed.', function(value:Bool):Void {
-      Preferences.naughtyness = value;
-    }, Preferences.naughtyness);
-    createPrefItemCheckbox('Downscroll', 'If enabled, this will make the notes move downwards.', function(value:Bool):Void {
-      Preferences.downscroll = value;
-    }, Preferences.downscroll);
-    createPrefItemPercentage('Strumline Background', 'Give the strumline a semi-transparent background', function(value:Int):Void {
-      Preferences.strumlineBackgroundOpacity = value;
-    }, Preferences.strumlineBackgroundOpacity);
-    createPrefItemCheckbox('Flashing Lights', 'If disabled, it will dampen flashing effects. Useful for people with photosensitive epilepsy.',
-      function(value:Bool):Void {
-        Preferences.flashingLights = value;
-      }, Preferences.flashingLights);
-    createPrefItemCheckbox('Camera Zooms', 'If disabled, camera stops bouncing to the song.', function(value:Bool):Void {
-      Preferences.zoomCamera = value;
-    }, Preferences.zoomCamera);
-    createPrefItemCheckbox('Debug Display', 'If enabled, FPS and other debug stats will be displayed.', function(value:Bool):Void {
-      Preferences.debugDisplay = value;
-    }, Preferences.debugDisplay);
-    createPrefItemCheckbox('Pause on Unfocus', 'If enabled, game automatically pauses when it loses focus.', function(value:Bool):Void {
-      Preferences.autoPause = value;
-    }, Preferences.autoPause);
-    createPrefItemCheckbox('Launch in Fullscreen', 'Automatically launch the game in fullscreen on startup', function(value:Bool):Void {
-      Preferences.autoFullscreen = value;
-    }, Preferences.autoFullscreen);
+    var userPreferences:Array<UserPreference> = PreferenceRegistry.listPreferences();
 
-    // disabled on macos due to "error: Late swap tearing currently unsupported"
-    #if !mac
-    createPrefItemEnum('VSync', 'If enabled, game will attempt to match framerate with your monitor.', [
-      "Off" => WindowVSyncMode.OFF,
-      "On" => WindowVSyncMode.ON,
-      "Adaptive" => WindowVSyncMode.ADAPTIVE,
-    ], function(key:String, value:WindowVSyncMode):Void {
-      trace("Setting vsync mode to " + key);
-      Preferences.vsyncMode = value;
-    }, switch (Preferences.vsyncMode)
+    for (preference in userPreferences)
+    {
+      var preferences:Array<UserPreferenceData> = preference.getPreferences();
+      createOptions(preferences);
+    }
+  }
+
+  /**
+   * Creates preferences for OptionsState.
+   */
+  function createOptions(preferences:Array<UserPreferenceData>):Void
+  {
+    if (preferences.length == 0) return;
+
+    for (pref in preferences)
+    {
+      switch (pref.type)
       {
-        case WindowVSyncMode.OFF: "Off";
-        case WindowVSyncMode.ON: "On";
-        case WindowVSyncMode.ADAPTIVE: "Adaptive";
-      });
-    #end
-    #if web
-    createPrefItemCheckbox('Unlocked Framerate', 'If enabled, the framerate will be unlocked.', function(value:Bool):Void {
-      Preferences.unlockedFramerate = value;
-    }, Preferences.unlockedFramerate);
-    #else
-    createPrefItemNumber('FPS', 'The maximum framerate that the game targets.', function(value:Float) {
-      Preferences.framerate = Std.int(value);
-    }, null, Preferences.framerate, 30, 300, 5, 0);
-    #end
-
-    createPrefItemCheckbox('Hide Mouse', 'If enabled, the mouse will be hidden when taking a screenshot.', function(value:Bool):Void {
-      Preferences.shouldHideMouse = value;
-    }, Preferences.shouldHideMouse);
-    createPrefItemCheckbox('Fancy Preview', 'If enabled, a preview will be shown after taking a screenshot.', function(value:Bool):Void {
-      Preferences.fancyPreview = value;
-    }, Preferences.fancyPreview);
-    createPrefItemCheckbox('Preview on save', 'If enabled, the preview will be shown only after a screenshot is saved.', function(value:Bool):Void {
-      Preferences.previewOnSave = value;
-    }, Preferences.previewOnSave);
-    // TODO: having oValue is weird, probably change this later? was done to accomodate VSync changes.
-    createPrefItemEnum('Save Format', 'Save screenshots to this format.', ['PNG' => 'PNG', 'JPEG' => 'JPEG'], function(value:String, oValue:String):Void {
-      Preferences.saveFormat = value;
-    }, Preferences.saveFormat);
-    createPrefItemNumber('JPEG Quality', 'The quality of JPEG screenshots.', function(value:Float) {
-      Preferences.jpegQuality = Std.int(value);
-    }, null, Preferences.jpegQuality, 0, 100, 5, 0);
+        case "checkbox":
+          createPrefItemCheckbox(pref.name, pref.description, pref.callback, pref.defaultValue);
+        case "number":
+          createPrefItemNumber(pref.name, pref.description, pref.callback, pref.data.valueFormatter, pref.defaultValue, pref.data.min, pref.data.max,
+            pref.data.step, pref.data.precision);
+        case "percentage":
+          createPrefItemPercentage(pref.name, pref.description, pref.callback, pref.defaultValue, pref.data.min, pref.data.max);
+        case "enum":
+          createPrefItemEnum(pref.name, pref.description, pref.data.keys, pref.callback, pref.defaultValue);
+      }
+    }
   }
 
   override function update(elapsed:Float):Void
